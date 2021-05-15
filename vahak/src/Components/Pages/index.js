@@ -29,7 +29,6 @@ const Pages = () => {
             case PAGE_STATUS.step2:
                 return <Step2
                     adress={adress}
-                    prizeAndDetails={prizeAndDetails}
                     setPrizeAndDetails={setPrizeAndDetails}
                     setPageStatus={setPageStatus}
                 />
@@ -37,11 +36,13 @@ const Pages = () => {
                 return <Step3
                     otp={otp}
                     setOtp={setOtp}
+                    adress={adress}
+                    prizeAndDetails={prizeAndDetails}
                     setPageStatus={setPageStatus}
                 />
             case PAGE_STATUS.step4:
                 return <Step4
-                    address={adress}
+                    adress={adress}
                     setAdress={setAdress}
                     prizeAndDetails={prizeAndDetails}
                     setPageStatus={setPageStatus}

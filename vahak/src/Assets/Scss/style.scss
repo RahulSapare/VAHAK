@@ -46,3 +46,30 @@ input[type=number] {
         padding: 0;
     }
 }
+
+.otp-inputStyle-normal, .otp-inputStyle-error{
+    border: 0;
+    margin: 0px 1rem ;
+    font-size: 3rem;
+    border-bottom: 1px solid rgb(150, 149, 149);
+}
+
+.otp-inputStyle-error{
+    color: rgb(236, 66, 66);
+    border-bottom: 2px solid rgb(236, 66, 66);
+}
+.whatsapp-check{
+    background-color: #eaeaea;
+    padding-left: .5em;
+    border-radius: 3px;
+    .whatsapp{
+        color:#008000;
+        svg{
+            margin-bottom: -5px;
+        }
+    }
+}
+
+.edit-icon{
+    color:rgb(49, 49, 236)
+}

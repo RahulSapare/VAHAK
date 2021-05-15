@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
-import {Grid, Button, Typography, InputBase, TextField, FormControlLabel, Checkbox, Box } from '@material-ui/core';
-import {EditOutlined as EditIcon} from '@material-ui/icons/';
+import {Grid, Button, Typography, TextField, FormControlLabel, Checkbox, Box } from '@material-ui/core';
+import {EditOutlined as EditIcon, WhatsApp as WhatsAppIcon} from '@material-ui/icons/';
 import Header from '../Header'
 
 const Step2 = (props) => {
     const {pageStatus=2, headerText="Place your Bid", adress, setPrizeAndDetails, setPageStatus} = props
+    const [priceValue, setPriceValue] = useState({})
 
     const SCHEMA_1 = Yup.object().shape({
 
@@ -14,7 +15,6 @@ const Step2 = (props) => {
         .min(100, 'Must be at least 3 characters')
         .lessThan(9999999999, "Amount is too large")
         .required('Required'),
-
         rate_negiotable: Yup.boolean()
     });
 
@@ -24,8 +24,8 @@ const Step2 = (props) => {
     }
 
     const handleSubmit_1 = (value) => {
+        setPriceValue({...value})
         setIsPressedNext(true)
-        setPrizeAndDetails({...value})
     }
     const SCHEMA_2 = Yup.object().shape({
         mobile_number: Yup.string()
@@ -47,7 +47,7 @@ const Step2 = (props) => {
     }
 
     const handleSubmit_2 = (value) => {
-        setPrizeAndDetails(prevState => ({...prevState,...value}))
+        setPrizeAndDetails({...priceValue,...value})
         setPageStatus(3)
     }
 
@@ -56,7 +56,7 @@ const Step2 = (props) => {
     return (
         <div>
             <Header headerText={headerText} pageStatus={pageStatus} />
-            <div>
+            <Box width={"70%"} mx="auto" my="2rem">
             <Formik
                 initialValues={initialValues_1}
                 onSubmit={handleSubmit_1}
@@ -71,7 +71,7 @@ const Step2 = (props) => {
                                         JOURNEY DETAILS
                                     </Typography>
                                 </Grid>
-                                <Grid item>
+                                <Grid item className="edit-icon">
                                     <Typography variant="span">
                                         <EditIcon />Edit
                                     </Typography>
@@ -86,7 +86,7 @@ const Step2 = (props) => {
                                 </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                                <Typography variant="h3" className="rupee-input">
+                                <Typography variant="h3" align="center" className="rupee-input">
                                     ₹
                                     {
                                         isPressedNext?
@@ -101,11 +101,12 @@ const Step2 = (props) => {
                                             onChange={formHandler.handleChange}
                                             error={formHandler.errors?.amount}
                                             helperText={formHandler.errors?.amount}
+                                            style={{width:"11rem"}}
                                             />
                                     }
                                 </Typography>
                             </Grid>
-                            <Grid item>
+                            <Grid item style={{margin:"auto"}}>
                                 <FormControlLabel
                                     control={<Checkbox name="rate_negiotable" />}
                                     label="Rate Negiotable" />
@@ -114,10 +115,11 @@ const Step2 = (props) => {
                         {
                             !isPressedNext &&
                             <Button
+                                fullWidth
                                 variant="contained"
                                 color="primary"
                                 type="submit"
-                                disabled={formHandler.errors?.amount}
+                                disabled={formHandler.errors?.amount? true: false}
                                 >
                                 Next
                             </Button>
@@ -135,7 +137,7 @@ const Step2 = (props) => {
                         {(formHandler) => (
                             <Form>
                             {console.log(formHandler)}
-                                <Grid container>
+                                <Grid container spacing={1}>
                                     <Grid item xs={12}>
                                         <Box width={1}>
                                             <TextField 
@@ -149,8 +151,11 @@ const Step2 = (props) => {
                                                 helperText={formHandler.errors?.mobile_number}                                        
                                             />
                                         </Box>
-                                        <Box>
-                                            <FormControlLabel control={<Checkbox name="checkedC" />} label="Get updates on" /> Whatsapp
+                                        <Box className="whatsapp-check">
+                                            <FormControlLabel control={<Checkbox name="checkedC" />} label="Get updates on" />
+                                            <Box component="span" className="whatsapp">
+                                                <WhatsAppIcon /> Whatsapp
+                                            </Box> 
                                         </Box>
                                     </Grid>
                                     <Grid item xs={12}>
@@ -176,7 +181,7 @@ const Step2 = (props) => {
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" color="primary" type="submit">
+                                        <Button variant="contained" color="primary" type="submit" fullWidth>
                                             Verify via OTP
                                         </Button>
                                     </Grid>
@@ -185,7 +190,7 @@ const Step2 = (props) => {
                         )}
                     </Formik>
                 }
-            </div>
+            </Box>
         </div>
     )
 }

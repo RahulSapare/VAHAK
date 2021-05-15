@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
-import {Grid, TextField, MenuItem, Button} from '@material-ui/core';
+import {Grid, TextField, MenuItem, Button, Box} from '@material-ui/core';
 import Header from '../Header'
 
 const Step1 = (props) => {
@@ -54,7 +54,7 @@ const Step1 = (props) => {
     return (
         <div>
             <Header headerText={headerText} pageStatus={pageStatus} />
-            <div>
+            <Box width={"70%"} mx="auto" my="2rem">
                 <Formik
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
@@ -63,7 +63,6 @@ const Step1 = (props) => {
                 >
                     {(formHandler) => (
                         <Form>
-                        {/* {console.log(formHandler)} */}
                         <Grid container spacing={1}>
                             <Grid  item xs={6} spacing={3}>
                                 <TextField 
@@ -119,14 +118,15 @@ const Step1 = (props) => {
                                      />
                             </Grid>
                         </Grid> 
-
-                        <Button variant="contained" color="primary" type="submit">
-                        Enter Bid Details
-                        </Button>   
+                        <Box mt={"1rem"}>
+                            <Button fullWidth variant="contained" color="primary" type="submit">
+                                Enter Bid Details
+                            </Button>   
+                        </Box>
                         </Form>
                     )}
                 </Formik>
-            </div>
+            </Box>
         </div>
     )
 }
