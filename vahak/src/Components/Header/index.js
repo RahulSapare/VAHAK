@@ -1,19 +1,20 @@
 import React from 'react'
 import Logo from '../../Assets/Images/download.png'
+import {Grid, Box} from '@material-ui/core';
 
 const index = (props) => {
     const {headerText, pageStatus} = props;
     return (
-        <div className = "header">
-            <div className="logo mx-4">
+        <Grid className="header">
+            <Box ml={4} className="logo">
                 <img src={Logo} alt="Logo_VAHAK" />    
-            </div>   
-            <div className="header-text text-center py-5">
+            </Box>   
+            <Box py={4} textAlign="center" className="header-text">
                 <h3>
                     {`${headerText}(${pageStatus}/4 step)`}
                 </h3>
-            </div>   
-        </div>
+            </Box>   
+        </Grid>
     )
 }
 

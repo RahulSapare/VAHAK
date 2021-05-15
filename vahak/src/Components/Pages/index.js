@@ -25,7 +25,7 @@ const Pages = () => {
 
     return (
         <>
-            <RenderPage status={1} />
+            <RenderPage status={2} />
         </>
     )
 }
