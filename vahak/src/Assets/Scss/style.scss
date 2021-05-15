@@ -19,3 +19,30 @@
         width: fit-content;
     }
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.price-input{
+    .MuiInput-formControl::before,
+    .MuiInput-formControl::after,
+    .MuiInput-formControl,
+    .MuiInput-underline:hover:not(.Mui-disabled):before,
+    .MuiInput-underline.Mui-disabled:before{
+        transition: unset;
+        border-bottom: unset;
+    }
+    .Mui-disabled{
+        color: #000
+    }
+    input{
+        padding: 0;
+    }
+}

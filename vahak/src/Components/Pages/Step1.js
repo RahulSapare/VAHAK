@@ -1,10 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import {Grid, TextField, MenuItem, Button} from '@material-ui/core';
 import Header from '../Header'
 
 const Step1 = (props) => {
+    const { pageStatus = 1, headerText = "Place your Bid", setAdress, setPageStatus } = props;
+
+    const [carNum, setCarNum] = useState(5)
+
     const SCHEMA = Yup.object().shape({
 
         source_location: Yup.string()
@@ -17,25 +21,36 @@ const Step1 = (props) => {
             .max(255)
             .required('Required'),
 
-        
-        car_type: Yup.array().ensure(),
+        car_type: Yup.string().ensure().required("Required"),
 
         no_of_travellers: Yup.number()
-        .required('Required'),
+            .integer("Please enter a valid number")
+            .moreThan(0 , 'Travellers count should be more than 0')
+            .lessThan(carNum , `Travellers count should be less than or equal to ${carNum-1}`)
+            .required('Required'),
     });
 
     const initialValues = {
         source_location:"",
         destination:"",
-        car_type: [],
-        no_of_travellers: 0
+        car_type: "",
+        no_of_travellers: null
     }
 
-    const handleSubmit = () => {
-
+    const handleDropDown = (formHandler, name) => {
+        if(name.target.value === "suv" ){
+            setCarNum(7)
+        }else{
+            setCarNum(5)
+        }
+        formHandler.setFieldValue(name.target.name,name.target.value)
     }
 
-    const { pageStatus = 1, headerText = "Place your Bid" } = props;
+    const handleSubmit = (e) => {
+        setAdress({...e})
+        setPageStatus(2)
+    }
+
     return (
         <div>
             <Header headerText={headerText} pageStatus={pageStatus} />
@@ -48,7 +63,7 @@ const Step1 = (props) => {
                 >
                     {(formHandler) => (
                         <Form>
-                        {console.log(formHandler)}
+                        {/* {console.log(formHandler)} */}
                         <Grid container spacing={1}>
                             <Grid  item xs={6} spacing={3}>
                                 <TextField 
@@ -58,6 +73,7 @@ const Step1 = (props) => {
                                     name="source_location"
                                     error={formHandler.errors?.source_location}
                                     helperText={formHandler.errors?.source_location}
+                                    onChange={formHandler.handleChange}
                                      />
                             </Grid>
                             <Grid  item xs={6} spacing={3}>
@@ -68,7 +84,7 @@ const Step1 = (props) => {
                                     name="destination"
                                     error={formHandler.errors?.destination}
                                     helperText={formHandler.errors?.destination}
-                                    
+                                    onChange={formHandler.handleChange}
                                      />
                             </Grid>
 
@@ -80,6 +96,7 @@ const Step1 = (props) => {
                                            select
                                            error={formHandler.errors?.car_type}
                                            helperText={formHandler.errors?.car_type}
+                                           onChange={(name)=>handleDropDown(formHandler,name)}
                                            >
                                     <MenuItem value="hatchback">Hatchback</MenuItem>
                                     <MenuItem value="sedan">Sedan</MenuItem>
@@ -92,10 +109,11 @@ const Step1 = (props) => {
                             <Grid  item xs={12} spacing={3}>
                                 <TextField 
                                     fullWidth
+                                    type="number"
                                     label="Number of Travellers"
                                     variant="outlined"
                                     name="no_of_travellers"
-                                    type="number"
+                                    onChange={formHandler.handleChange}
                                     error={formHandler.errors?.no_of_travellers}
                                     helperText={formHandler.errors?.no_of_travellers}
                                      />
