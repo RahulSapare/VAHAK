@@ -27,9 +27,13 @@ const Step2 = (props) => {
         setPriceValue({...value})
         setIsPressedNext(true)
     }
+
+    var re = new RegExp(/^(?:(?:\+|0{0,2})91(\s*[-]\s*)?|[0]?)?[789]\d{9}$/);
+    
+    
     const SCHEMA_2 = Yup.object().shape({
         mobile_number: Yup.string()
-            .matches(/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/, 'Phone number is not valid please enter with +91')
+            .matches(re, 'Phone number is not valid please enter with +91')
             .required("Required"),
         user_name:Yup.string()
             .min(3, 'Must be at least 3 characters')

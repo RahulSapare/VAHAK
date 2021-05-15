@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { Formik, Form } from 'formik'
 import {Divider, Grid, Box, Typography, Button } from '@material-ui/core';
 import {EditOutlined as EditIcon} from '@material-ui/icons/';
 import OtpInput from 'react-otp-input';
@@ -7,9 +6,8 @@ import Header from '../Header'
 
 const Step3 = (props) => {
     const {pageStatus=3, headerText="Verify OTP", adress, prizeAndDetails, setPageStatus} = props
-    console.log(prizeAndDetails)
 
-    const defaultOTP = 1234
+    // const defaultOTP = 1234
     const [OTP, setOTP] = useState()
     const [OTPerror, setOTPerror] = useState(false)
 
