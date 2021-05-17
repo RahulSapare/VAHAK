@@ -75,11 +75,15 @@ const Step2 = (props) => {
                                         JOURNEY DETAILS
                                     </Typography>
                                 </Grid>
-                                <Grid item className="edit-icon">
+
+
+                                <Grid item className="edit-icon" onClick={()=>setPageStatus(1)} style={{cursor:"pointer"}}>
                                     <Typography variant="span">
                                         <EditIcon />Edit
                                     </Typography>
                                 </Grid>
+
+
                             </Grid>
                             <Grid item xs={12}>
                                 <Typography variant="h6">

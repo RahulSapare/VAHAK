@@ -38,7 +38,7 @@ const Step3 = (props) => {
                                 JOURNEY DETAILS
                                 </Typography>
                         </Grid>
-                        <Grid item className="edit-icon">
+                        <Grid item className="edit-icon" onClick={()=>setPageStatus(1)} style={{cursor:"pointer"}}>
                             <Typography variant="span">
                                 <EditIcon />Edit
                             </Typography>
@@ -90,7 +90,7 @@ const Step3 = (props) => {
                             We've sent an OTP to ypur mobile number. Please enter it below to submit your bid {prizeAndDetails?.mobile_number}
                         </Typography>
                     </Grid>
-                    <Grid item xs={2} className="edit-icon">
+                    <Grid item xs={2} className="edit-icon" onClick={()=>setPageStatus(2)} style={{cursor:"pointer"}}>
                         <EditIcon /> Edit 
                     </Grid>
                     <Grid container item xs={12} justify="space-around">

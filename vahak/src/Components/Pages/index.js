@@ -7,7 +7,12 @@ import Step4 from './Step4'
 
 const Pages = () => {
 
-    const [adress, setAdress] = useState({})
+    const [adress, setAdress] = useState({
+        source_location:"",
+        destination:"",
+        car_type: "",
+        no_of_travellers: null
+    })
     const [prizeAndDetails, setPrizeAndDetails] = useState({})
     const [otp, setOtp] = useState({
         field1: 1,
@@ -23,6 +28,7 @@ const Pages = () => {
         switch (status) {
             case PAGE_STATUS.step1:
                 return <Step1
+                    adress={adress}
                     setAdress={setAdress}
                     setPageStatus={setPageStatus}
                 />

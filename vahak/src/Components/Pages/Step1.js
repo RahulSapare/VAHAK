@@ -5,7 +5,7 @@ import {Grid, TextField, MenuItem, Button, Box} from '@material-ui/core';
 import Header from '../Header'
 
 const Step1 = (props) => {
-    const { pageStatus = 1, headerText = "Place your Bid", setAdress, setPageStatus } = props;
+    const { pageStatus = 1, headerText = "Place your Bid", setAdress, setPageStatus, adress } = props;
 
     const [carNum, setCarNum] = useState(5)
 
@@ -30,12 +30,12 @@ const Step1 = (props) => {
             .required('Required'),
     });
 
-    const initialValues = {
-        source_location:"",
-        destination:"",
-        car_type: "",
-        no_of_travellers: null
-    }
+    // const initialValues = {
+    //     source_location:"",
+    //     destination:"",
+    //     car_type: "",
+    //     no_of_travellers: null
+    // }
 
     const handleDropDown = (formHandler, name) => {
         if(name.target.value === "suv" ){
@@ -56,10 +56,10 @@ const Step1 = (props) => {
             <Header headerText={headerText} pageStatus={pageStatus} />
             <Box width={"70%"} mx="auto" my="2rem">
                 <Formik
-                    initialValues={initialValues}
+                    initialValues={adress}
                     onSubmit={handleSubmit}
                     validationSchema={SCHEMA}
-                    enableReinitialize
+                    //enableReinitialize
                 >
                     {(formHandler) => (
                         <Form>
